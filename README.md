@@ -1,4 +1,4 @@
-# 🔐 Trust Wallet – Automation Test Suite
+#  Trust Wallet – Automation Test Suite
 
 > **Framework:** WebdriverIO 8 + Appium 2 + UiAutomator2  
 > **Language:** JavaScript (Node.js)  
@@ -6,7 +6,7 @@
 
 ---
 
-## 📐 Architecture Overview
+## Architecture Overview
 
 ```
 trust-wallet-automation/
@@ -34,7 +34,7 @@ trust-wallet-automation/
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 | Tool | Version | Install |
 |------|---------|---------|
@@ -47,7 +47,7 @@ trust-wallet-automation/
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ```bash
 # 1. Clone the repo
@@ -75,7 +75,7 @@ appium --port 4723
 
 ---
 
-## ▶️ Running Tests
+##  Running Tests
 
 ```bash
 # Run the full suite
@@ -94,7 +94,7 @@ npm run report
 
 ---
 
-## 📊 Viewing the HTML Report
+## HTML Report
 
 Open `reports/test-report.html` in any browser — no server required.
 
@@ -106,7 +106,7 @@ npm run report
 
 ---
 
-## 🧠 Approach & Assumptions
+## Approach & Assumptions
 
 ### Why WebdriverIO + Appium (and not Detox / Espresso)?
 
@@ -153,7 +153,7 @@ XPath is used only as a fallback when accessibility IDs are missing (see BUG-01,
 
 ---
 
-## 🐛 Known Issues
+## Known Issues
 
 See `reports/test-report.html` → Bug Report section for full details on:
 
