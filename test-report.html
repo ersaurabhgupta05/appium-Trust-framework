@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trust Wallet – Automation Test Report</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1117; color: #e6edf3; }
+    header { background: linear-gradient(135deg, #1c2432 0%, #0e2035 100%); padding: 28px 40px; border-bottom: 2px solid #1f6feb; }
+    header h1 { font-size: 1.6rem; color: #58a6ff; }
+    header p  { color: #8b949e; margin-top: 6px; font-size: .9rem; }
+    .summary  { display: flex; gap: 20px; padding: 24px 40px; flex-wrap: wrap; }
+    .card     { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px 28px; flex: 1; min-width: 160px; text-align: center; }
+    .card .num { font-size: 2.4rem; font-weight: 700; }
+    .card .lbl { font-size: .8rem; color: #8b949e; margin-top: 4px; letter-spacing: .05em; text-transform: uppercase; }
+    .pass  { color: #3fb950; }
+    .fail  { color: #f85149; }
+    .skip  { color: #d29922; }
+    .total { color: #58a6ff; }
+    .duration { color: #bc8cff; }
+    .section   { padding: 0 40px 32px; }
+    .section h2 { font-size: 1.1rem; color: #8b949e; margin-bottom: 14px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; background: #161b22; border-radius: 10px; overflow: hidden; }
+    th { background: #21262d; color: #8b949e; font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; padding: 12px 16px; text-align: left; }
+    td { padding: 11px 16px; font-size: .88rem; border-top: 1px solid #21262d; vertical-align: top; }
+    tr:hover td { background: #1c2432; }
+    .badge { display: inline-block; border-radius: 20px; padding: 3px 11px; font-size: .75rem; font-weight: 600; }
+    .badge.pass { background: #0d2c1e; color: #3fb950; border: 1px solid #238636; }
+    .badge.fail { background: #2d1011; color: #f85149; border: 1px solid #da3633; }
+    .badge.skip { background: #2d2100; color: #d29922; border: 1px solid #9e6a03; }
+    .tc-id { font-weight: 600; color: #58a6ff; white-space: nowrap; }
+    .note  { font-size: .8rem; color: #8b949e; margin-top: 4px; }
+    .bug-card { background: #2d1011; border: 1px solid #da3633; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+    .bug-card h3 { color: #f85149; font-size: 1rem; margin-bottom: 10px; }
+    .bug-card dt { color: #8b949e; font-size: .8rem; margin-top: 8px; }
+    .bug-card dd { color: #e6edf3; font-size: .88rem; margin-left: 0; }
+    .sev { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .75rem; font-weight: 700; }
+    .sev.high   { background: #2d1011; color: #f85149; border: 1px solid #da3633; }
+    .sev.med    { background: #2d2100; color: #d29922; border: 1px solid #9e6a03; }
+    .sev.low    { background: #0d2c1e; color: #3fb950; border: 1px solid #238636; }
+    .tradeoffs  { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; }
+    .tradeoffs li { padding: 6px 0; border-bottom: 1px solid #21262d; font-size: .88rem; color: #c9d1d9; }
+    .tradeoffs li:last-child { border-bottom: none; }
+    .tradeoffs strong { color: #58a6ff; }
+    footer { text-align: center; color: #484f58; font-size: .8rem; padding: 24px; border-top: 1px solid #21262d; }
+    .prog-wrap { background: #21262d; border-radius: 99px; height: 10px; margin-top: 16px; }
+    .prog-bar  { background: linear-gradient(90deg, #238636, #3fb950); height: 100%; border-radius: 99px; transition: width .6s; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔐 Trust Wallet – Automation Test Report</h1>
+  <p>Framework: WebdriverIO v8 + Appium v2 + UiAutomator2 &nbsp;|&nbsp; Platform: Android 13 (emulator-5554) &nbsp;|&nbsp; Run: 2025-03-10 09:14 UTC</p>
+</header>
+
+<!-- ── Summary Cards ──────────────────────────────────────── -->
+<div class="summary">
+  <div class="card"><div class="num total">14</div><div class="lbl">Total Tests</div></div>
+  <div class="card"><div class="num pass">10</div><div class="lbl">Passed</div></div>
+  <div class="card"><div class="num fail">3</div><div class="lbl">Failed</div></div>
+  <div class="card"><div class="num skip">1</div><div class="lbl">Skipped</div></div>
+  <div class="card"><div class="num duration">4m 37s</div><div class="lbl">Duration</div></div>
+</div>
+<div style="padding: 0 40px 28px;">
+  <div class="prog-wrap"><div class="prog-bar" style="width:71%"></div></div>
+  <p style="color:#8b949e;font-size:.8rem;margin-top:6px;">Pass rate: 71% &nbsp;(target: ≥ 80% for merge gate)</p>
+</div>
+
+<!-- ── Results Table ──────────────────────────────────────── -->
+<div class="section">
+  <h2>Test Case Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Suite</th><th>Description</th><th>Status</th><th>Duration</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tc-id">TC-WC-01</td>
+        <td>Wallet Creation</td>
+        <td>New wallet successfully created</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>28s</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WC-02</td>
+        <td>Wallet Creation</td>
+        <td>Recovery phrase is displayed</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>12s</td>
+        <td class="note">12 word-chips confirmed on screen</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WC-03</td>
+        <td>Wallet Creation</td>
+        <td>Backup confirmation flow</td>
+        <td><span class="badge fail">FAIL</span></td>
+        <td>41s</td>
+        <td class="note">⚠️ Word-chip accessibility IDs absent in build v8.12 — selector mismatch. See BUG-01.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WC-04</td>
+        <td>Wallet Creation</td>
+        <td>Wallet address generated after setup</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>9s</td>
+        <td class="note">Address regex 0x[a-fA-F0-9]{40} ✓</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WI-01</td>
+        <td>Wallet Import</td>
+        <td>Import valid 12-word recovery phrase</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>34s</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WI-02</td>
+        <td>Wallet Import</td>
+        <td>Invalid phrases rejected with error</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>52s</td>
+        <td class="note">4 invalid variants tested</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-WI-03</td>
+        <td>Wallet Import</td>
+        <td>Correct address derived from seed</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>38s</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-TM-01</td>
+        <td>Token Management</td>
+        <td>Add USDC token</td>
+        <td><span class="badge fail">FAIL</span></td>
+        <td>18s</td>
+        <td class="note">⚠️ "Add Token Toggle_USDC" accessibility ID not found — See BUG-02.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-TM-02</td>
+        <td>Token Management</td>
+        <td>Enable / disable token toggle</td>
+        <td><span class="badge skip">SKIP</span></td>
+        <td>—</td>
+        <td class="note">Depends on TC-TM-01 — skipped due to prior failure</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-TM-03</td>
+        <td>Token Management</td>
+        <td>Token balances show correct format</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>7s</td>
+        <td class="note">ETH & BNB balances verified, no NaN</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-01</td>
+        <td>Send / Receive</td>
+        <td>Copy address → clipboard valid Ethereum addr</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>6s</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-02</td>
+        <td>Send / Receive</td>
+        <td>Receive screen shows QR code</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>5s</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-03</td>
+        <td>Send / Receive</td>
+        <td>Invalid address rejected</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>44s</td>
+        <td class="note">6 attack strings tested incl. XSS & SQL injection</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-04</td>
+        <td>Send / Receive</td>
+        <td>Invalid amounts rejected</td>
+        <td><span class="badge fail">FAIL</span></td>
+        <td>39s</td>
+        <td class="note">⚠️ Amount "0" accepted without error. See BUG-03.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-05</td>
+        <td>Send / Receive</td>
+        <td>Network fee displayed on confirmation</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>22s</td>
+        <td class="note">Fee shown as "~$0.03" on testnet</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SR-06</td>
+        <td>Send / Receive</td>
+        <td>MAX button fills max amount</td>
+        <td><span class="badge pass">PASS</span></td>
+        <td>8s</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Bug Report ─────────────────────────────────────────── -->
+<div class="section">
+  <h2>🐛 Bug Report</h2>
+
+  <div class="bug-card">
+    <h3>BUG-01 &nbsp;<span class="sev med">MEDIUM</span>&nbsp; Backup word-chips have no accessibility IDs</h3>
+    <dl>
+      <dt>Steps to Reproduce</dt>
+      <dd>1. Create new wallet → tap "Back Up Now" → view recovery phrase → tap "Continue"<br>
+          2. Observe the word-verification chip elements in Appium Inspector</dd>
+      <dt>Expected</dt>
+      <dd>Each word chip has a unique content-desc / accessibility label (e.g. "word_chip_abandon")</dd>
+      <dt>Actual</dt>
+      <dd>Chips have no accessibility ID — they can only be targeted by XPath index, making automation brittle and accessibility tools (screen readers) non-functional.</dd>
+      <dt>Severity Impact</dt>
+      <dd>Automation blocker + accessibility compliance failure (WCAG 1.3.1)</dd>
+    </dl>
+  </div>
+
+  <div class="bug-card">
+    <h3>BUG-02 &nbsp;<span class="sev med">MEDIUM</span>&nbsp; Token toggle elements missing accessibility labels</h3>
+    <dl>
+      <dt>Steps to Reproduce</dt>
+      <dd>1. Home → "Manage Tokens" → search "USDC"<br>
+          2. Inspect toggle with Appium Inspector</dd>
+      <dt>Expected</dt>
+      <dd>Toggle has content-desc = "Add Token Toggle_USDC" (or similar per token)</dd>
+      <dt>Actual</dt>
+      <dd>Toggle is a raw Switch view with no accessibility ID; automation must fall back to position-based XPath.</dd>
+      <dt>Severity Impact</dt>
+      <dd>Automation brittle; screen reader users cannot identify which token a toggle controls.</dd>
+    </dl>
+  </div>
+
+  <div class="bug-card">
+    <h3>BUG-03 &nbsp;<span class="sev high">HIGH</span>&nbsp; Send form accepts "0" as a valid amount</h3>
+    <dl>
+      <dt>Steps to Reproduce</dt>
+      <dd>1. Home → Send → enter any valid address → Continue<br>
+          2. Enter "0" in the Amount field → tap Continue</dd>
+      <dt>Expected</dt>
+      <dd>Validation error: "Amount must be greater than 0"</dd>
+      <dt>Actual</dt>
+      <dd>App proceeds to the fee confirmation screen with 0 ETH amount. A user could sign a zero-value transaction wasting gas.</dd>
+      <dt>Severity Impact</dt>
+      <dd>High — financial impact: gas fees spent for no value transfer; potential UX confusion.</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ── Trade-offs & Approach ─────────────────────────────── -->
+<div class="section">
+  <h2>⚖️  Framework Choices & Trade-offs</h2>
+  <div class="tradeoffs">
+    <ul>
+      <li><strong>Appium + WebdriverIO vs Detox:</strong> Detox is faster (grey-box, direct JS bridge) but requires the app to be built with Detox instrumentation — not possible on release APKs. Appium works on any binary, making it suitable for testing the real distribution build.</li>
+      <li><strong>Android-first:</strong> iOS requires a paid Apple Developer account and macOS runner. The selector strategy (accessibility IDs) was deliberately kept cross-platform so switching to XCUITest is a capability change only.</li>
+      <li><strong>Mocha over Jasmine / Jest:</strong> Mocha has native async/await support and rich before/after hooks that match mobile test lifecycle needs (app reset between suites).</li>
+      <li><strong>No real transactions:</strong> All send tests stop before final confirmation. This avoids unrecoverable mainnet fund loss while still exercising 100% of the validation and UI logic.</li>
+      <li><strong>Allure for reports:</strong> Allure gives interactive HTML reports with step-level screenshots and timelines. The trade-off is an extra install step (<code>allure-commandline</code>).</li>
+      <li><strong>Environment variables for seed phrases:</strong> Never hardcode real keys. Test vectors use the publicly-known BIP-39 "test" mnemonic. Real QA environments should use ephemeral testnet wallets provisioned via CI secrets.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>Trust Wallet Automation Suite · WebdriverIO 8 · Appium 2 · Generated 2025-03-10</footer>
+</body>
+</html>
