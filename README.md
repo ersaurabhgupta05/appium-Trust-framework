@@ -18,7 +18,7 @@ trust-wallet-automation/
 │   ├── wallet-import/      # TC-WI-01 → TC-WI-03
 │   ├── token-management/   # TC-TM-01 → TC-TM-03
 │   ├── send-receive/       # TC-SR-01 → TC-SR-06
-│   └── security/           # TC-SEC-01 → TC-SEC-04
+│   
 ├── utils/
 │   ├── helpers.js          # Reusable wait/tap/screenshot utilities
 │   ├── selectors.js        # Central selector registry (all accessibility IDs)
