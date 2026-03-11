@@ -86,7 +86,7 @@ npm run test:wallet-creation
 npm run test:wallet-import
 npm run test:token-management
 npm run test:send-receive
-npm run test:security
+
 
 # Open the Allure report (after a run)
 npm run report
