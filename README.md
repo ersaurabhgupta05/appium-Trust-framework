@@ -1,6 +1,6 @@
 #  Trust Wallet – Automation Test Suite
 
-> **Framework:** WebdriverIO  + Appium  + UiAutomator 
+> **Framework:** WebdriverIO  + Appium  + UiAutomator  
 > **Language:** JavaScript (Node.js)  
 > **Platform:** Android 
 
