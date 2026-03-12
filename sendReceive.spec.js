@@ -12,7 +12,8 @@ const DATA              = require('../../utils/testData');
 describe('💸  Send & Receive', () => {
 
   // ── TC-SR-01 ─────────────────────────────────────────────────
-  it('TC-SR-01 | Copy wallet address copies a valid Ethereum address', async () => {
+  it('TC-SR-01 | Copy wallet address copies a valid Ethereum address', async () =>
+    {
     await waitForElement(SEL.HOME.WALLET_ADDRESS_BTN);
     await tapElement(SEL.HOME.WALLET_ADDRESS_BTN);
     await tapElement(SEL.HOME.COPY_ADDRESS_BTN);
