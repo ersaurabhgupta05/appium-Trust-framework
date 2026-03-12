@@ -1,6 +1,6 @@
 // tests/wallet-creation/walletCreation.spec.js
 // ─────────────────────────────────────────────────────────────────
-// TC-WC-01 → TC-WC-04  |  Wallet Creation Flow
+// TC-WC-01 → TC-WC-04 |  Wallet Creation Flow
 // ─────────────────────────────────────────────────────────────────
 const { expect }        = require('chai');
 const { tapElement, waitForElement, waitForText, takeScreenshot } = require('../../utils/helpers');
